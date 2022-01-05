@@ -21,9 +21,21 @@
     <ClCompile Include="MenuFunctions.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InterpreterFunctions.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpreterFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

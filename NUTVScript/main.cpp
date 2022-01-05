@@ -1,16 +1,13 @@
 #include <iostream>
-#include <limits>
-#include <fstream>
-#include <vector>
-#include <string>
 
 #include "MenuFunctions.h"
+#include "interpreter.h"
 
 int main() {
 
     printMenu();
     
-    while (true) {
+    while (true) { //forever run the menu
         getUserInput();
     }
     
