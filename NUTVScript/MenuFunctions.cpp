@@ -8,22 +8,25 @@ void printMenu() {
 
 void getUserInput() {
     std::string str;
+    std::string var;
     std::cout << "> ";
     std::cin >> str;
 
-    if (str == "ls") { //change == to begins with
+    if (str.rfind("ls", 0) == 0) { 
         ls();
     }
-    else if (str == "run") {
-        //run();
+    else if (str.rfind("run", 0) == 0) {
+        std::cin >> var;
+        //run(var);
     }
-    else if (str == "man") {
-        //man();
+    else if (str.rfind("man", 0) == 0) {
+        std::cin >> var;
+        man(var);
     }
-    else if (str == "help") {
+    else if (str.rfind("help", 0) == 0) {
         help();
     }
-    else if (str == "exit") {
+    else if (str.rfind("exit", 0) == 0) {
         std::exit(0);
     }
     else {
@@ -55,6 +58,8 @@ void ls() {
 
 void man(std::string command) {
 
+    std::cout << std::endl;
+
     if (command == "ls") {
         std::cout << "ls - Lists all files in the active directory. NUTVScript scripts must be located in the active directory." << std::endl;
     }
@@ -69,6 +74,9 @@ void man(std::string command) {
     }
     else if (command == "man") {
         std::cout << "man [command] - Prints detailed information about each command in the NUTVScript interpreter." << std::endl;
+    }
+    else {
+        std::cout << "Invalid command entered, try running 'help' for a list of valid commands." << std::endl;
     }
 
 }
