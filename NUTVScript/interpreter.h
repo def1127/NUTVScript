@@ -2,5 +2,5 @@
 
 
 void run(std::string fileName); //runs the interpreter
-bool checkHeader(); //checks that the file has the correct header
+bool checkHeader(std::string filename); //checks that the file has the correct header
 std::string readLine();
