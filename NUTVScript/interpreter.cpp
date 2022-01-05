@@ -5,9 +5,22 @@
 #include <string>
 
 #include "InterpreterFunctions.h"
+#include "interpreter.h"
 
 std::vector<std::string> code; //store the user's program as a vector of strings globally.
+
+std::vector<int> varVals; //store the variable values
+std::vector<std::string> varNames; //store the variable names
+
+std::vector<int> funcLines; //store the lines that functions start on
+std::vector<std::string> funcNames; //store the function names
+
+int line; //store the current line number
+int prevFuncLine; //stores the line the program was running before starting a new function
+
 bool checkHeader(std::string filename); //declare the function
+
+char delimiter = ' '; //space character
 
 void run(std::string filename) {
 	
@@ -43,6 +56,12 @@ void run(std::string filename) {
 			std::cout << "Header is okay!" << std::endl;
 		}
 
+		setVars();
+
+		for (int i = 0; i < varNames.size(); i++) {
+			std::cout << varNames[i] << " is set to " << varVals[i] << std::endl;
+		}
+
 	}
 
 	file.close(); //close the file
@@ -62,4 +81,41 @@ bool checkHeader(std::string filename) {
 
 std::string readLine() {
 	return "return";
+}
+
+void setVars(){
+	std::string str;
+
+	for (int i = 0; i < code.size(); i++) {//iterate through the program line by line
+		
+		std::vector<std::string> words{};
+		str = code[i];
+		std::stringstream sstream(code[i]);
+		std::string word;
+
+		do {
+			word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end());
+			words.push_back(word);
+		} while (std::getline(sstream,word,delimiter));
+
+//		while ((pos = str.find(delimiter)) != std::string::npos) { //load each line into a vector of words
+//			words.push_back(str.substr(0, pos));
+//			str.erase(0, pos + delimiter.length());
+//		}
+		
+		words.erase(words.begin());
+
+		if (words[0] == "Enter") {
+			if (!(words.size() == 4)) { //check that the format is "Enter [name] = [val]
+				std::cout << "Error: Variable declared improperly on line " << i << std::endl;
+				std::exit(0);
+			}
+			varNames.push_back(words[1]);
+			varVals.push_back(std::stoi(words[3]));
+		}
+	}
+}
+
+void setFuncs(){
+
 }
