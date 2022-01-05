@@ -12,7 +12,7 @@ void getUserInput() {
     std::cout << "> ";
     std::cin >> str;
 
-    if (str.rfind("ls", 0) == 0) { 
+    if (str.rfind("ls", 0) == 0) {
         ls();
     }
     else if (str.rfind("run", 0) == 0) {
