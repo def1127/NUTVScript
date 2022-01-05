@@ -5,3 +5,4 @@ Dont take this too seriously.
 ## How to write a program / language specifications
 First line of file must be the name of the file.\
 Second line must begin with "Written By:"\
+Main function should be titled "Act One:" followed by a name for the act
