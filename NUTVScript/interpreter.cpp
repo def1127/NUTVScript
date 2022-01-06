@@ -16,14 +16,14 @@ std::vector<std::string> varNames; //store the variable names
 std::vector<int> funcLines; //store the lines that functions start on
 std::vector<std::string> funcNames; //store the function names
 
-int line; //store the current line number
-int prevFuncLine; //stores the line the program was running before starting a new function
-bool done = false;
-
 void run(std::string filename) {
 	
 	std::ifstream file;
 	std::string path = "/Users/defdo/source/repos/NUTVScript/x64/Debug\\"; //this navigates the program to the active directory
+
+	bool done = false; //has the program finished?
+	int line; //store the current line number
+	int prevFuncLine; //stores the line the program was running before starting a new function
 
 	path.append(filename);
 
@@ -37,15 +37,19 @@ void run(std::string filename) {
 		std::cout << "File opened okay!" << std::endl;
 
 		std::string line;
+		
+		//clear the code vector before writing to it
+		code.erase(code.begin(), code.end());
 
 		while (std::getline(file, line)) { //read lines in to the vector
 			std::istringstream iss(line);
 			code.push_back(line);
 		}
-
-//		for (int i = 0; i < code.size(); i++) { //print out the vector DEBUGGING CODE
-//			std::cout << code[i] << std::endl;
-//		}
+		//clear all vectors in case there is anything left over.
+		varNames.erase(varNames.begin(), varNames.end());
+		varVals.erase(varVals.begin(), varVals.end());
+		funcLines.erase(funcLines.begin(), funcLines.end());
+		funcNames.erase(funcNames.begin(), funcNames.end());
 
 		if (!checkHeader(filename, code)) {
 			std::cout << "Error: invalid file header, please correct." << std::endl;
@@ -57,20 +61,16 @@ void run(std::string filename) {
 
 		code.erase(code.begin(), code.begin()+2);
 
-		setVars(code, varVals, varNames);
+		/*
+		Could insert a section to iterate through and remove lines with comments, would save processing time later
+		Also could remove all "Enter" commands since variables are global and all are stored when the program initializes
+		*/
 
-//		for (int i = 0; i < varNames.size(); i++) { //DEBUGGING CODE
-//			std::cout << varNames[i] << " is set to " << varVals[i] << std::endl;
-//		}
+		setVars(code, varVals, varNames);
 
 		setFuncs(code, funcNames, funcLines);
 
-//		for (int i = 0; i < funcLines.size(); i++) { //DEBUGGING CODE
-//			std::cout << funcNames[i] << " starts on line " << funcLines[i]+1 << std::endl;
-//		}
-
 		std::cout << "Ready to start running code!" << std::endl;
-
 
 		while (!done) {
 			std::string str;
