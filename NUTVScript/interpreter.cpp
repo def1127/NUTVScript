@@ -97,13 +97,10 @@ void setVars(){
 			word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end());
 			words.push_back(word);
 		} while (std::getline(sstream,word,delimiter));
-
-//		while ((pos = str.find(delimiter)) != std::string::npos) { //load each line into a vector of words
-//			words.push_back(str.substr(0, pos));
-//			str.erase(0, pos + delimiter.length());
-//		}
 		
-		words.erase(words.begin());
+		if (!(words.size() == 1 && words[0] == "")) {
+			words.erase(words.begin());
+		}
 
 		if (words[0] == "Enter") {
 			if (!(words.size() == 4)) { //check that the format is "Enter [name] = [val]
