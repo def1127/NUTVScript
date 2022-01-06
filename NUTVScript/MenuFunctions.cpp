@@ -63,22 +63,22 @@ void man(std::string command) { //print out detailed help information about each
     std::cout << std::endl;
 
     if (command == "ls") {
-        std::cout << "ls - Lists all files in the active directory. NUTVScript scripts must be located in the active directory." << std::endl;
+        std::cout << "ls - Lists all files in the active directory. NUTVScript scripts must be located in the active directory.\n" << std::endl;
     }
     else if (command == "help") {
-        std::cout << "help - Prints out a list of all valid commands in the NUTVScript interpreter." << std::endl;
+        std::cout << "help - Prints out a list of all valid commands in the NUTVScript interpreter.\n" << std::endl;
     }
     else if (command == "run") {
-        std::cout << "run [filename] - Runs the NUTVScript interpreter on the input file. NUTVScript scripts must be located in the active directory." << std::endl;
+        std::cout << "run [filename] - Runs the NUTVScript interpreter on the input file. NUTVScript scripts must be located in the active directory.\n" << std::endl;
     }
     else if (command == "exit") {
-        std::cout << "exit - Exits the NUTVScript interpreter." << std::endl;
+        std::cout << "exit - Exits the NUTVScript interpreter.\n" << std::endl;
     }
     else if (command == "man") {
-        std::cout << "man [command] - Prints detailed information about each command in the NUTVScript interpreter." << std::endl;
+        std::cout << "man [command] - Prints detailed information about each command in the NUTVScript interpreter.\n" << std::endl;
     }
     else {
-        std::cout << "Invalid command entered, try running 'help' for a list of valid commands." << std::endl;
+        std::cout << "Invalid command entered, try running 'help' for a list of valid commands.\n" << std::endl;
     }
 
 }
