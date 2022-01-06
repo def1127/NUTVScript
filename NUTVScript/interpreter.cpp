@@ -45,21 +45,27 @@ void run(std::string filename) {
 			code.push_back(line);
 		}
 
-		for (int i = 0; i < code.size(); i++) { //print out the vector DEBUGGING CODE
-			std::cout << code[i] << std::endl;
-		}
+//		for (int i = 0; i < code.size(); i++) { //print out the vector DEBUGGING CODE
+//			std::cout << code[i] << std::endl;
+//		}
 
 		if (!checkHeader(filename)) {
 			std::cout << "Error: invalid file header, please correct." << std::endl;
 		}
 		else {
-			std::cout << "Header is okay!" << std::endl;
+			std::cout << "Header is okay!" << std::endl; //DEBUGGING CODE
 		}
 
 		setVars();
 
-		for (int i = 0; i < varNames.size(); i++) {
+		for (int i = 0; i < varNames.size(); i++) { //DEBUGGING CODE
 			std::cout << varNames[i] << " is set to " << varVals[i] << std::endl;
+		}
+
+		setFuncs();
+
+		for (int i = 0; i < funcLines.size(); i++) { //DEBUGGING CODE
+			std::cout << funcNames[i] << " starts on line " << funcLines[i]+1 << std::endl;
 		}
 
 	}
@@ -90,29 +96,55 @@ void setVars(){
 		
 		std::vector<std::string> words{};
 		str = code[i];
-		std::stringstream sstream(code[i]);
+		std::stringstream sstream(code[i]); //put the line of code into a string stream
 		std::string word;
 
-		do {
+		do { //erase the string stream word by word in to a vector of words
 			word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end());
 			words.push_back(word);
 		} while (std::getline(sstream,word,delimiter));
 		
-		if (!(words.size() == 1 && words[0] == "")) {
+		if (!(words.size() == 1 && words[0] == "")) { //checks that the words vector has at least two words in it, and deletes the empty first word if so
 			words.erase(words.begin());
 		}
 
-		if (words[0] == "Enter") {
-			if (!(words.size() == 4)) { //check that the format is "Enter [name] = [val]
-				std::cout << "Error: Variable declared improperly on line " << i << std::endl;
+		if (words[0] == "Enter") { //if it detects the word "Enter" the keyphrase for declaring a variable
+			if (!(words.size() == 4)) { //check that the format is "Enter [name] = [val]"
+				std::cout << "Error: Variable declared improperly on line " << i+1 << std::endl; //give an error for wrong variables
 				std::exit(0);
 			}
-			varNames.push_back(words[1]);
+			varNames.push_back(words[1]); //add the variable name and value to the vector
 			varVals.push_back(std::stoi(words[3]));
 		}
 	}
 }
 
 void setFuncs(){
+	std::string str;
 
+	for (int i = 0; i < code.size(); i++) {//iterate through the program line by line
+
+		std::vector<std::string> words{};
+		str = code[i];
+		std::stringstream sstream(code[i]); //put the line of code into a string stream
+		std::string word;
+
+		do { //erase the string stream word by word in to a vector of words
+			word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end());
+			words.push_back(word);
+		} while (std::getline(sstream, word, delimiter));
+
+		if (!(words.size() == 1 && words[0] == "")) { //checks that the words vector has at least two words in it, and deletes the empty first word if so
+			words.erase(words.begin());
+		}
+
+		if (words[0] == "Scene") { //if it detects the word "Scene" the keyphrase for declaring a function
+			if (!(words.size() == 2)) { //check that the format is "Scene: [name]"
+				std::cout << "Error: Scene declared improperly on line " << i+1 << std::endl; //give an error for wrong function declaration
+				std::exit(0);
+			}
+			funcNames.push_back(words[1]); //add the variable name and value to the vector
+			funcLines.push_back(i);
+		}
+	}
 }
