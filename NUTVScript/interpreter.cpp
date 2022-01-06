@@ -91,6 +91,9 @@ void run(std::string filename) {
 					else if (words[1] == "Exclaim") {
 						exclaim(code, i);
 					}
+					else if (words[1] == "Set") {
+						set(code, i, varVals, varNames);
+					}
 				}
 			}
 		}
