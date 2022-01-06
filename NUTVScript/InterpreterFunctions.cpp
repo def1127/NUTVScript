@@ -76,3 +76,15 @@ bool checkHeader(std::string filename, std::vector<std::string>& code) {
 	}
 	return false;
 }
+
+void exclaim(std::vector<std::string> code, int line) { //code to enable the "Exclaim" command
+	std::string str = code[line];
+	str.erase(str.begin(),str.begin()+7); //remove the "Exclaim" word and empty space
+
+	for (int i = 0; i < str.size(); i++) {
+		std::cout << str[i];
+	}
+
+	std::cout << std::endl;
+
+}

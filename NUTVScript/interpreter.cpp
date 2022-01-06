@@ -17,6 +17,7 @@ std::vector<std::string> funcNames; //store the function names
 
 int line; //store the current line number
 int prevFuncLine; //stores the line the program was running before starting a new function
+bool done = false;
 
 void run(std::string filename) {
 	
@@ -67,11 +68,34 @@ void run(std::string filename) {
 //			std::cout << funcNames[i] << " starts on line " << funcLines[i]+1 << std::endl;
 //		}
 
+		std::cout << "Ready to start running code!" << std::endl;
+
+
+		while (!done) {
+			std::string str;
+			for (int i = 0; i < code.size(); i++) {//iterate through the program line by line
+
+				std::vector<std::string> words{};
+				str = code[i];
+				std::stringstream sstream(code[i]); //put the line of code into a string stream
+				std::string word;
+
+				do { //erase the string stream word by word in to a vector of words
+					word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
+					words.push_back(word);
+				} while (std::getline(sstream, word, ' '));
+				if (!(words.size() == 1)) {
+					if (words[1] == "Cut!") {
+						done = true;
+					}
+					else if (words[1] == "Exclaim") {
+						exclaim(code, i);
+					}
+				}
+			}
+		}
+
 	}
-
-	std::cout << "Ready to start running code!" << std::endl;
-
-
 
 	file.close(); //close the file
 
