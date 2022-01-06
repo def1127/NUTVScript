@@ -37,10 +37,17 @@ void setVars(std::vector<std::string>& code, std::vector<int>& varVals, std::vec
 				varVals.push_back(std::stoi(words[3]));
 			}
 			else {
-				std::cout << "Error, variables cannot be initialized as text.";
-				std::exit(1);
+				for (int j = 0; j < varNames.size(); j++) {
+					if (words[3] == varNames[j]) {
+						varVals.push_back(varVals[j]);
+						break;
+					}
+					else if (j == varNames.size() - 1) {
+						std::cout << "Error on line " << i << ". Variable " << words[1] << " cannot be initialized as " << words[3] << std::endl;
+						exit(0);
+					}
+				}
 			}
-
 		}
 	}
 }
