@@ -49,7 +49,8 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 			break;
 		}
 		else if (i == varNames.size() - 1) {
-			std::cout << "Error, variable " << words[1] << "not found, check that all variables have already been declared." << std::endl;
+			std::cout << "Error on line " << line <<", variable " << words[0] << " not found, check that all variables have already been declared." << std::endl;
+			exit(0);
 		}
 	}
 	for (int i = 0; i < varNames.size(); i++) { //iterate through the variables vector to find the index of the variable selected
@@ -58,7 +59,8 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 			break;
 		}
 		else if (i == varNames.size() - 1) {
-			std::cout << "Error, variable " << words[3] << "not found, check that all variables have already been declared." << std::endl;
+			std::cout << "Error on line " << line << ", variable " << words[2] << " not found, check that all variables have already been declared." << std::endl;
+			exit(0);
 		}
 	}
 	for (int i = 0; i < varNames.size(); i++) { //iterate through the variables vector to find the index of the variable selected
@@ -67,7 +69,8 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 			break;
 		}
 		else if (i == varNames.size() - 1) {
-			std::cout << "Error, variable " << words[5] << "not found, check that all variables have already been declared." << std::endl;
+			std::cout << "Error on line " << line << ", variable " << words[4] << " not found, check that all variables have already been declared." << std::endl;
+			exit(0);
 		}
 	}
 	//perform the actual operations
