@@ -70,7 +70,6 @@ void run(std::string filename) {
 
 		std::cout << "Ready to start running code!" << std::endl;
 
-
 		while (!done) {
 			std::string str;
 			for (int i = 0; i < code.size(); i++) {//iterate through the program line by line

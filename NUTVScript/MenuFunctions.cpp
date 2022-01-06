@@ -7,7 +7,6 @@ void printMenu() {
 }
 
 void getUserInput() {
-//    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //flush the buffer, crashes the program for some reason? allows the user to do things they shouldn't
 
     std::string str;
     std::string var;
@@ -34,6 +33,8 @@ void getUserInput() {
     else { //if the user didn't enter a command, tell the user there was an error
         std::cout << "Error: invalid input, try 'help' for a list of commands" << std::endl;
     }
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //clear the buffer of anything left over
 }
 
 void help() { //print all commands available
