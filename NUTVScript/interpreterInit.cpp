@@ -32,7 +32,15 @@ void setVars(std::vector<std::string>& code, std::vector<int>& varVals, std::vec
 				std::exit(0);
 			}
 			varNames.push_back(words[1]); //add the variable name and value to the vector
-			varVals.push_back(std::stoi(words[3]));
+
+			if (is_number(words[3])) {
+				varVals.push_back(std::stoi(words[3]));
+			}
+			else {
+				std::cout << "Error, variables cannot be initialized as text.";
+				std::exit(1);
+			}
+
 		}
 	}
 }
@@ -76,4 +84,10 @@ bool checkHeader(std::string filename, std::vector<std::string>& code) {
 		}
 	}
 	return false;
+}
+
+bool is_number(const std::string& s) {
+	std::string::const_iterator it = s.begin();
+	while (it != s.end() && std::isdigit(*it)) ++it;
+	return !s.empty() && it == s.end();
 }

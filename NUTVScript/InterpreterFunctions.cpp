@@ -4,7 +4,7 @@
 #include <sstream>
 #include "InterpreterFunctions.h"
 
-char delimiter = ' '; //space character
+char delim = ' '; //space character
 
 void exclaim(std::vector<std::string> code, int line) { //code to enable the "Exclaim" command
 	std::string str = code[line];
@@ -30,7 +30,7 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 	do { //erase the string stream word by word in to a vector of words
 		word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
 		words.push_back(word);
-	} while (std::getline(sstream, word, delimiter));
+	} while (std::getline(sstream, word, delim));
 
 	if ((words.size() == 7 && words[0] == "")) { //checks that the words vector has at least 6 words in it, and deletes the empty first word if so
 		words.erase(words.begin());
