@@ -6,6 +6,7 @@
 
 #include "InterpreterFunctions.h"
 #include "interpreter.h"
+#include "interpreterInit.h"
 
 std::vector<std::string> code; //store the user's program as a vector of strings globally.
 

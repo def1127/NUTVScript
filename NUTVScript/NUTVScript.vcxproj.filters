@@ -27,6 +27,9 @@
     <ClCompile Include="InterpreterFunctions.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="interpreterInit.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuFunctions.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InterpreterFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreterInit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

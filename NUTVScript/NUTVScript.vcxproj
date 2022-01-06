@@ -142,12 +142,14 @@
   <ItemGroup>
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="InterpreterFunctions.cpp" />
+    <ClCompile Include="interpreterInit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="InterpreterFunctions.h" />
+    <ClInclude Include="interpreterInit.h" />
     <ClInclude Include="MenuFunctions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
