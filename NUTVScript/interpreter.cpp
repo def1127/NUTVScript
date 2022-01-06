@@ -47,24 +47,31 @@ void run(std::string filename) {
 
 		if (!checkHeader(filename, code)) {
 			std::cout << "Error: invalid file header, please correct." << std::endl;
+			return;
 		}
 		else {
 			std::cout << "Header is okay!" << std::endl; //DEBUGGING CODE
 		}
 
+		code.erase(code.begin(), code.begin()+2);
+
 		setVars(code, varVals, varNames);
 
-		for (int i = 0; i < varNames.size(); i++) { //DEBUGGING CODE
-			std::cout << varNames[i] << " is set to " << varVals[i] << std::endl;
-		}
+//		for (int i = 0; i < varNames.size(); i++) { //DEBUGGING CODE
+//			std::cout << varNames[i] << " is set to " << varVals[i] << std::endl;
+//		}
 
 		setFuncs(code, funcNames, funcLines);
 
-		for (int i = 0; i < funcLines.size(); i++) { //DEBUGGING CODE
-			std::cout << funcNames[i] << " starts on line " << funcLines[i]+1 << std::endl;
-		}
+//		for (int i = 0; i < funcLines.size(); i++) { //DEBUGGING CODE
+//			std::cout << funcNames[i] << " starts on line " << funcLines[i]+1 << std::endl;
+//		}
 
 	}
+
+	std::cout << "Ready to start running code!" << std::endl;
+
+
 
 	file.close(); //close the file
 
