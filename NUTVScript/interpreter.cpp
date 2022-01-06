@@ -94,6 +94,9 @@ void run(std::string filename) {
 					else if (words[1] == "Set") {
 						set(code, i, varVals, varNames);
 					}
+					else if (words[1] == "#") {
+						continue;
+					}
 				}
 			}
 		}
