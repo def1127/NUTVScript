@@ -12,6 +12,7 @@ Declare a variable (only integers allowed) with the "Enter:" keyword\
 To perform math, use the "Set" keyword\
 Syntax is "Set [var] = [var] [+/-] [var]"\
 Comments can be made only on their own line by starting the line with a # followed by a space.\
+All functions including main must end with Cut!
 
 ## Functions
 Now this is very important, declare a function with the Scene: [name] keyphrase, if it doesn't look exactly like this, it won't be found by the interpreter.
