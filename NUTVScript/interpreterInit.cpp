@@ -87,7 +87,9 @@ bool checkHeader(std::string filename, std::vector<std::string>& code) {
 	if (str.rfind(filename, 0) == 0) { //iterate through line one and two and make sure that they contain the requested information
 		str = code[1];
 		if (str.rfind("Written By:", 0) == 0) {
-			return true;
+			if (code[code.size()] == "Cut!") {
+				return true;
+			}
 		}
 	}
 	return false;
