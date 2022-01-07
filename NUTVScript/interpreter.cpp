@@ -59,7 +59,7 @@ void run(std::string filename) {
 			std::cout << "Header is okay!" << std::endl; //DEBUGGING CODE
 		}
 
-		code.erase(code.begin(), code.begin()+2);
+		code.erase(code.begin(), code.begin()+2); //this messes up with the line number error codes.
 
 		/*
 		Could insert a section to iterate through and remove lines with comments, would save processing time later
@@ -68,7 +68,7 @@ void run(std::string filename) {
 
 		setVars(code, varVals, varNames);
 
-		setFuncs(code, funcNames, funcLines);
+		//setFuncs(code, funcNames, funcLines);
 
 		std::cout << "Ready to start running code!" << std::endl;
 
@@ -88,6 +88,7 @@ void run(std::string filename) {
 				if (!(words.size() == 1)) {
 					if (words[1] == "Cut!") {
 						done = true;
+						break;
 					}
 					else if (words[1] == "Exclaim") {
 						exclaim(code, i);
@@ -97,6 +98,20 @@ void run(std::string filename) {
 					}
 					else if (words[1] == "#") {
 						continue;
+					}
+					else if (words[1] == "Scene:") {
+						continue;
+					}
+					else if (words[1] == "Jumpcut:") {
+						i = jumpCut(code, i) - 1;
+					}
+					else {
+						if (words.size() == 1) {
+							continue;
+						}
+						else {
+							std::cout << "Error: Invalid command on line " << i << "." << std::endl; //reports an error because the line hasn't been deleted.
+						}
 					}
 				}
 			}
