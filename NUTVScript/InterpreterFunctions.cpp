@@ -10,8 +10,37 @@ void exclaim(std::vector<std::string> code, int line) { //code to enable the "Ex
 	std::string str = code[line];
 	str.erase(str.begin(),str.begin()+8); //remove the "Exclaim" word and empty space
 
-	for (int i = 0; i < str.size(); i++) {
-		std::cout << str[i];
+	std::vector<std::string> words{};
+	std::stringstream sstream(code[line]); //put the line of code into a string stream
+	std::string word;
+
+	do { //erase the string stream word by word in to a vector of words
+		word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
+		words.push_back(word);
+	} while (std::getline(sstream, word, delim));
+
+	if (words.size() > 2) {
+		words.erase(words.begin(), words.begin() + 2);
+	}
+
+	for (int i = 0; i < words.size(); i++) {
+		if (!(words[i].at(0) == '%')) {
+			if (words[i].size() > 0) {
+				for (int j = 0; j < words[i].size() - 1; j++) {
+					if (words[i].at(j) == '/' && words[i].at(j + 1) == '%') {
+						std::cout << "% ";
+						i++;
+					}
+					else if(j == (words[i].size() - 2)) {
+						std::cout << words[i] << " ";
+					}
+				}
+			}
+			
+		}
+		else {
+			//okay, so the word starts with a % sign
+		}
 	}
 
 	std::cout << std::endl;
