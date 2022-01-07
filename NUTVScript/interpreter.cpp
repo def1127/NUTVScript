@@ -86,7 +86,7 @@ void run(std::string filename) {
 				}
 			}
 			else {
-				code.erase(code.begin() + i);
+				code.erase(code.begin() + i); //if the line is empty then erase it
 				i = i - 1;
 			}
 
@@ -94,7 +94,7 @@ void run(std::string filename) {
 
 		std::cout << "Ready to start running code!" << std::endl;
 
-		code.insert(code.begin(), "Jumpcut: main");
+		code.insert(code.begin(), "Jumpcut: main"); //insert a jumpcut into the first line of the program so it will start execution at the main scene
 
 		while (!done) {
 			std::string str;
@@ -109,7 +109,8 @@ void run(std::string filename) {
 					word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
 					words.push_back(word);
 				} while (std::getline(sstream, word, ' '));
-				if (!(words.size() == 1)) {
+				
+				if (!(words.size() == 1)) {//iterate through and check what the first word in the line is, this tells us what command to run
 					if (words[1] == "Cut!") {
 						done = true;
 						break;
@@ -135,6 +136,7 @@ void run(std::string filename) {
 						}
 						else {
 							std::cout << "Error: Invalid command \"" << code[i] << "\"." << std::endl; //reports an error because the line hasn't been deleted.
+							i = code.size() - 2; //exit interpretation
 						}
 					}
 				}
@@ -145,8 +147,4 @@ void run(std::string filename) {
 
 	file.close(); //close the file
 
-}
-
-std::string readLine() {
-	return "return";
 }

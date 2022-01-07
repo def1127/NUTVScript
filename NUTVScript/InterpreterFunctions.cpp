@@ -18,7 +18,7 @@ void exclaim(std::vector<std::string> code, int line) { //code to enable the "Ex
 
 }
 
-void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std::vector<std::string>& varNames) {
+void set(std::vector<std::string> code, int &line, std::vector<int>& varVals, std::vector<std::string>& varNames) {
 
 	std::string str = code[line];
 	str.erase(str.begin(), str.begin() + 4); //remove the "Set" word and empty space
@@ -37,8 +37,10 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 		words.erase(words.begin());
 	}
 
-	if (!(words.size() == 5) && words[1] == "=" && (words[3] == "+" || words[3] == "-")) { //check that there are the proper number of words and that there is an equals sign and a +/-
+	if (!((words.size() == 5) && words[1] == "=" && (words[3] == "+" || words[3] == "-"))) { //check that there are the proper number of words and that there is an equals sign and a +/-
 		std::cout << "Error, set command callled incorrectly \"" << code[line] << "\". Proper syntax is 'set [var1] = [var2] [+/-] [var3]'" << std::endl;
+		line = code.size() - 2;		
+		return; //set the last line of the program to cause it to gracefully crash
 	}
 
 	int vara, varb, varc;
@@ -50,7 +52,8 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 		}
 		else if (i == varNames.size() - 1) {
 			std::cout << "Error: variable " << words[0] << " not found, check that all variables have already been declared." << std::endl;
-			exit(0);
+			line = code.size() - 2;
+			return; //set the last line of the program to cause it to gracefully crash
 		}
 	}
 	for (int i = 0; i < varNames.size(); i++) { //iterate through the variables vector to find the index of the variable selected
@@ -59,8 +62,9 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 			break;
 		}
 		else if (i == varNames.size() - 1) {
-			std::cout << "Error: variable " << words[0] << " not found, check that all variables have already been declared." << std::endl;
-			exit(0);
+			std::cout << "Error: variable " << words[2] << " not found, check that all variables have already been declared." << std::endl;
+			line = code.size() - 2;
+			return; //set the last line of the program to cause it to gracefully crash
 		}
 	}
 	for (int i = 0; i < varNames.size(); i++) { //iterate through the variables vector to find the index of the variable selected
@@ -69,8 +73,9 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 			break;
 		}
 		else if (i == varNames.size() - 1) {
-			std::cout << "Error: variable " << words[0] << " not found, check that all variables have already been declared." << std::endl;
-			exit(0);
+			std::cout << "Error: variable " << words[4] << " not found, check that all variables have already been declared." << std::endl;
+			line = code.size() - 2;
+			return; //set the last line of the program to cause it to gracefully crash
 		}
 	}
 	//perform the actual operations
@@ -82,6 +87,8 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 	}
 	else {
 		std::cout << "Error: Invalid set command \"" << code[line] << "\". Proper syntax is 'set [var1] = [var2] [+/-] [var3]" << std::endl; //a catch error if something goes wrong
+		line = code.size() - 2;
+		return; //set the last line of the program to cause it to gracefully crash
 	}
 
 
