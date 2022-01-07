@@ -93,26 +93,34 @@ int jumpCut(std::vector<std::string> code, int line) {
 
 	std::string targetScene = str;
 
-	for (int i = 0; i < code.size(); i++) {
-		std::vector<std::string> words{};
-		str = code[i];
-		std::stringstream sstream(code[i]); //put the line of code into a string stream
-		std::string word;
+	if (line == -1) {
+		return code.size() - 1;
+	}
 
-		do { //erase the string stream word by word in to a vector of words
-			word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
-			words.push_back(word);
-		} while (std::getline(sstream, word, ' '));
+	if(line >= 0){
+		for (int i = 0; i < code.size(); i++) {
+			std::vector<std::string> words{};
+			str = code[i];
+			std::stringstream sstream(code[i]); //put the line of code into a string stream
+			std::string word;
 
-		if (!(words.size() == 1 && words[0] == "")) { //checks that the words vector has at least two words in it, and deletes the empty first word if so
-			words.erase(words.begin());
+			do { //erase the string stream word by word in to a vector of words
+				word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
+				words.push_back(word);
+			} while (std::getline(sstream, word, ' '));
+
+			if (!(words.size() == 1 && words[0] == "")) { //checks that the words vector has at least two words in it, and deletes the empty first word if so
+				words.erase(words.begin());
+			}
+
+			if ((words.size() == 2) && words[0] == "Scene:" && words[1] == targetScene) { //checks if the first word is Scene and the second word on the line is the target scene
+				return i;
+			}
+			else if (i == code.size() - 1) {
+				std::cout << "Error: Scene " << targetScene << " not found." << std::endl;
+				return code.size() - 1;
+			}
 		}
 
-		if ((words.size() == 2) && words[0] == "Scene:" && words[1] == targetScene) { //checks if the first word is Scene and the second word on the line is the target scene
-			return i;
-		}
-		else if (i == code.size()-1) {
-			std::cout << "Error: Scene " << targetScene << " not found." << std::endl;
-		}
 	}
 }
