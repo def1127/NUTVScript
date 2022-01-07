@@ -38,7 +38,7 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 	}
 
 	if (!(words.size() == 5) && words[1] == "=" && (words[3] == "+" || words[3] == "-")) { //check that there are the proper number of words and that there is an equals sign and a +/-
-		std::cout << "Error, set command incorrectly called on line " << line << ". Proper syntax is 'set [var1] = [var2] [+/-] [var3]'" << std::endl;
+		std::cout << "Error, set command callled incorrectly \"" << code[line] << "\". Proper syntax is 'set [var1] = [var2] [+/-] [var3]'" << std::endl;
 	}
 
 	int vara, varb, varc;
@@ -49,7 +49,7 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 			break;
 		}
 		else if (i == varNames.size() - 1) {
-			std::cout << "Error on line " << line <<", variable " << words[0] << " not found, check that all variables have already been declared." << std::endl;
+			std::cout << "Error: variable " << words[0] << " not found, check that all variables have already been declared." << std::endl;
 			exit(0);
 		}
 	}
@@ -59,7 +59,7 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 			break;
 		}
 		else if (i == varNames.size() - 1) {
-			std::cout << "Error on line " << line << ", variable " << words[2] << " not found, check that all variables have already been declared." << std::endl;
+			std::cout << "Error: variable " << words[0] << " not found, check that all variables have already been declared." << std::endl;
 			exit(0);
 		}
 	}
@@ -69,7 +69,7 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 			break;
 		}
 		else if (i == varNames.size() - 1) {
-			std::cout << "Error on line " << line << ", variable " << words[4] << " not found, check that all variables have already been declared." << std::endl;
+			std::cout << "Error: variable " << words[0] << " not found, check that all variables have already been declared." << std::endl;
 			exit(0);
 		}
 	}
@@ -81,7 +81,7 @@ void set(std::vector<std::string> code, int line, std::vector<int>& varVals, std
 		varVals[vara] = varVals[varb] - varVals[varc];
 	}
 	else {
-		std::cout << "Error, in the set command on line " << line << ". Proper syntax is 'set [var1] = [var2] [+/-] [var3]'" << std::endl; //a catch error if something goes wrong
+		std::cout << "Error: Invalid set command \"" << code[line] << "\". Proper syntax is 'set [var1] = [var2] [+/-] [var3]" << std::endl; //a catch error if something goes wrong
 	}
 
 
@@ -112,7 +112,7 @@ int jumpCut(std::vector<std::string> code, int line) {
 			return i;
 		}
 		else if (i == code.size()-1) {
-			std::cout << "Error on line " << line << ". Scene " << targetScene << " not found." << std::endl;
+			std::cout << "Error: Scene " << targetScene << " not found." << std::endl;
 		}
 	}
 }

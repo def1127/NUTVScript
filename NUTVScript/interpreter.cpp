@@ -63,6 +63,32 @@ void run(std::string filename) {
 
 		setVars(code, varVals, varNames);
 
+		for (int i = 0; i < code.size(); i++) {
+			std::string str;
+			std::vector<std::string> words{};
+			str = code[i];
+			std::stringstream sstream(code[i]); //put the line of code into a string stream
+			std::string word;
+
+			do { //erase the string stream word by word in to a vector of words
+				word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
+				words.push_back(word);
+			} while (std::getline(sstream, word, ' '));
+
+			if (words.size() > 1) {
+				if (words[1].rfind("#", 0) == 0) { //if it detects a comment, delete it
+					code.erase(code.begin() + i);
+				}
+				else if (words[1] == "Enter") { //if it detects an Enter command, delete it
+					code.erase(code.begin() + i);
+				}
+			}
+			else {
+				code.erase(code.begin() + i);
+			}
+
+		}
+
 		std::cout << "Ready to start running code!" << std::endl;
 
 		while (!done) {
@@ -89,7 +115,7 @@ void run(std::string filename) {
 					else if (words[1] == "Set") {
 						set(code, i, varVals, varNames);
 					}
-					else if (words[1] == "#") {
+					else if (words[1].rfind("#", 0) == 0) {
 						continue;
 					}
 					else if (words[1] == "Scene:") {
@@ -103,7 +129,7 @@ void run(std::string filename) {
 							continue;
 						}
 						else {
-							std::cout << "Error: Invalid command on line " << i << "." << std::endl; //reports an error because the line hasn't been deleted.
+							std::cout << "Error: Invalid command \"" << code[i] << "\"." << std::endl; //reports an error because the line hasn't been deleted.
 						}
 					}
 				}
