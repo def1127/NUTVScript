@@ -13,9 +13,6 @@ std::vector<std::string> code; //store the user's program as a vector of strings
 std::vector<int> varVals; //store the variable values
 std::vector<std::string> varNames; //store the variable names
 
-std::vector<int> funcLines; //store the lines that functions start on
-std::vector<std::string> funcNames; //store the function names
-
 void run(std::string filename) {
 	
 	std::ifstream file;
@@ -48,8 +45,6 @@ void run(std::string filename) {
 		//clear all vectors in case there is anything left over.
 		varNames.erase(varNames.begin(), varNames.end());
 		varVals.erase(varVals.begin(), varVals.end());
-		funcLines.erase(funcLines.begin(), funcLines.end());
-		funcNames.erase(funcNames.begin(), funcNames.end());
 
 		if (!checkHeader(filename, code)) {
 			std::cout << "Error: invalid file header, please correct." << std::endl;
@@ -67,8 +62,6 @@ void run(std::string filename) {
 		*/
 
 		setVars(code, varVals, varNames);
-
-		//setFuncs(code, funcNames, funcLines);
 
 		std::cout << "Ready to start running code!" << std::endl;
 
@@ -103,7 +96,7 @@ void run(std::string filename) {
 						continue;
 					}
 					else if (words[1] == "Jumpcut:") {
-						i = jumpCut(code, i) - 1;
+						i = jumpCut(code, i) - 1; //set the line number to the jumpcut line number, subtract one because the for loop increments by one at the end
 					}
 					else {
 						if (words.size() == 1) {

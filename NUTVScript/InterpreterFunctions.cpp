@@ -108,7 +108,7 @@ int jumpCut(std::vector<std::string> code, int line) {
 			words.erase(words.begin());
 		}
 
-		if ((words.size() == 2) && words[0] == "Scene:" && words[1] == targetScene) {
+		if ((words.size() == 2) && words[0] == "Scene:" && words[1] == targetScene) { //checks if the first word is Scene and the second word on the line is the target scene
 			return i;
 		}
 		else if (i == code.size()-1) {
