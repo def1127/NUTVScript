@@ -8,7 +8,12 @@ Second line must begin with "Written By:"\
 Main function should be titled "Scene: main".\
 Declare a function with the "Scene:" keyword\
 Declare a variable (only integers allowed) with the "Enter:" keyword\
-Files must end with "Cut!"\
+**Files must end with "Cut!"**\
 To perform math, use the "Set" keyword\
 Syntax is "Set [var] = [var] [+/-] [var]"\
-Comments can be made only on their own line by starting the line with a # followed by a space.
+Comments can be made only on their own line by starting the line with a # followed by a space.\
+All functions including main must end with Cut!
+
+## Functions
+Now this is very important, declare a function with the Scene: [name] keyphrase, if it doesn't look exactly like this, it won't be found by the interpreter.
+Each function **MUST** contain a JUMPCUT: to the next function you want to run, failure to do this will cause the interpreter to keep running code past the end of your function and may cause unintended behavior.
