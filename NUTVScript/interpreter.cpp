@@ -78,13 +78,16 @@ void run(std::string filename) {
 			if (words.size() > 1) {
 				if (words[1].rfind("#", 0) == 0) { //if it detects a comment, delete it
 					code.erase(code.begin() + i);
+					i = i - 1;
 				}
 				else if (words[1] == "Enter") { //if it detects an Enter command, delete it
 					code.erase(code.begin() + i);
+					i = i - 1;
 				}
 			}
 			else {
 				code.erase(code.begin() + i);
+				i = i - 1;
 			}
 
 		}
