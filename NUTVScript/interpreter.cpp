@@ -14,7 +14,7 @@ std::vector<int> varVals; //store the variable values
 std::vector<std::string> varNames; //store the variable names
 
 void run(std::string filename) {
-	
+
 	std::ifstream file;
 	std::string path = "/Users/defdo/source/repos/NUTVScript/x64/Debug\\"; //this navigates the program to the active directory
 
@@ -34,7 +34,7 @@ void run(std::string filename) {
 		std::cout << "File opened okay!" << std::endl;
 
 		std::string line;
-		
+
 		//clear the code vector before writing to it
 		code.erase(code.begin(), code.end());
 
@@ -54,7 +54,7 @@ void run(std::string filename) {
 			std::cout << "Header is okay!" << std::endl; //DEBUGGING CODE
 		}
 
-		code.erase(code.begin(), code.begin()+2); //this messes up with the line number error codes.
+		code.erase(code.begin(), code.begin() + 2); //this messes up with the line number error codes.
 
 		/*
 		Could insert a section to iterate through and remove lines with comments, would save processing time later
@@ -109,7 +109,7 @@ void run(std::string filename) {
 					word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
 					words.push_back(word);
 				} while (std::getline(sstream, word, ' '));
-				
+
 				if (!(words.size() == 1)) {//iterate through and check what the first word in the line is, this tells us what command to run
 					if (words[1] == "Cut!") {
 						done = true;

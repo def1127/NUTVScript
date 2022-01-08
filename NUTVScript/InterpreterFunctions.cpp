@@ -6,18 +6,14 @@
 
 char delim = ' '; //space character
 
-void exclaim(std::vector<std::string> code, int &line, std::vector<std::string> varNames, std::vector<int> varVals) { //code to enable the "Exclaim" command
+void exclaim(std::vector<std::string> code, int& line, std::vector<std::string> varNames, std::vector<int> varVals) { //code to enable the "Exclaim" command
 	std::string str = code[line];
-	str.erase(str.begin(),str.begin()+8); //remove the "Exclaim" word and empty space
+	str.erase(str.begin(), str.begin() + 8); //remove the "Exclaim" word and empty space
 
 	std::vector<std::string> words{};
 	std::stringstream sstream(code[line]); //put the line of code into a string stream
-	std::string word;
-
-	do { //erase the string stream word by word in to a vector of words
-		word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
-		words.push_back(word);
-	} while (std::getline(sstream, word, delim));
+	
+	getWords(sstream, words);
 
 	if (words.size() > 2) {
 		words.erase(words.begin(), words.begin() + 2);
@@ -57,19 +53,16 @@ void exclaim(std::vector<std::string> code, int &line, std::vector<std::string> 
 	std::cout << std::endl;
 }
 
-void set(std::vector<std::string> code, int &line, std::vector<int>& varVals, std::vector<std::string>& varNames) {
+void set(std::vector<std::string> code, int& line, std::vector<int>& varVals, std::vector<std::string>& varNames) {
 
 	std::string str = code[line];
 	str.erase(str.begin(), str.begin() + 4); //remove the "Set" word and empty space
 
 	std::vector<std::string> words{};
 	std::stringstream sstream(code[line]); //put the line of code into a string stream
-	std::string word;
+	
+	getWords(sstream, words);
 
-	do { //erase the string stream word by word in to a vector of words
-		word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
-		words.push_back(word);
-	} while (std::getline(sstream, word, delim));
 
 	if ((words.size() == 7 && words[0] == "")) { //checks that the words vector has at least 6 words in it, and deletes the empty first word if so
 		words.erase(words.begin(), words.begin() + 2);
@@ -77,7 +70,7 @@ void set(std::vector<std::string> code, int &line, std::vector<int>& varVals, st
 
 	if (!((words.size() == 5) && words[1] == "=" && (words[3] == "+" || words[3] == "-"))) { //check that there are the proper number of words and that there is an equals sign and a +/-
 		std::cout << "Error, set command callled incorrectly \"" << code[line] << "\". Proper syntax is 'set [var1] = [var2] [+/-] [var3]'" << std::endl;
-		line = code.size() - 2;		
+		line = code.size() - 2;
 		return; //set the last line of the program to cause it to gracefully crash
 	}
 
@@ -117,7 +110,7 @@ void set(std::vector<std::string> code, int &line, std::vector<int>& varVals, st
 		}
 	}
 	//perform the actual operations
-	if (words[3] == "+") { 
+	if (words[3] == "+") {
 		varVals[vara] = varb + varc;
 	}
 	else if (words[3] == "-") {
@@ -153,17 +146,13 @@ int jumpCut(std::vector<std::string> code, int line) {
 		targetScene = "Break-Time";
 	}
 
-	if(line >= 0){
+	if (line >= 0) {
 		for (i; i < code.size(); i++) {
 			std::vector<std::string> words{};
 			str = code[i];
 			std::stringstream sstream(code[i]); //put the line of code into a string stream
-			std::string word;
 
-			do { //erase the string stream word by word in to a vector of words
-				word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
-				words.push_back(word);
-			} while (std::getline(sstream, word, ' '));
+			getWords(sstream, words);
 
 			if (!(words.size() == 1 && words[0] == "")) { //checks that the words vector has at least two words in it, and deletes the empty first word if so
 				words.erase(words.begin());
@@ -191,12 +180,8 @@ void perhaps(std::vector<std::string> code, int& line, std::vector<int>& varVals
 
 	std::vector<std::string> words{};
 	std::stringstream sstream(str); //put the line of code into a string stream
-	std::string word;
 
-	do { //erase the string stream word by word in to a vector of words
-		word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
-		words.push_back(word);
-	} while (std::getline(sstream, word, delim));
+	getWords(sstream, words);
 
 	if ((words.size() == 4 && words[0] == "")) { //checks that the words vector has at least 5 words in it, and deletes the empty first word if so
 		words.erase(words.begin());
@@ -267,8 +252,15 @@ void perhaps(std::vector<std::string> code, int& line, std::vector<int>& varVals
 		line = code.size() - 2;
 	}
 
-
-
-	
 	return;
+}
+
+void getWords(std::stringstream& sstream, std::vector<std::string>& words) {
+	std::string word;
+
+	do { //erase the string stream word by word in to a vector of words
+		word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
+		words.push_back(word);
+	} while (std::getline(sstream, word, delim));
+
 }

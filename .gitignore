@@ -361,3 +361,11 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/NUTVScript/temp/exclaim.cpp
+/NUTVScript/temp/Jumpcut.cpp
+/NUTVScript/temp/exclaim.h
+/NUTVScript/temp/Jumpcut.h
+/NUTVScript/temp/Perhaps.cpp
+/NUTVScript/temp/Perhaps.h
+/NUTVScript/temp/Set.cpp
+/NUTVScript/temp/Set.h
