@@ -1,6 +1,8 @@
 # NUTVScript
-NUTVScript is a custom interpreter designed to read .nutv code files that are formatted as film scripts.
-This is an esolang.
+NUTVScript is a custom interpreter designed to read .nutv code files that are formatted as film scripts. This is an esolang.
+
+LET THE RECORD REFLECT THAT I STARTED THIS ON 01/05/22 AND HAVE A MVP ON 01/07/22
+
 Dont take this too seriously.
 ## How to write a program / language specifications
 First line of file must be the name of the file.\
