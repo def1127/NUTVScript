@@ -130,6 +130,12 @@ void run(std::string filename) {
 					else if (words[1] == "Jumpcut:") {
 						i = jumpCut(code, i) - 1; //set the line number to the jumpcut line number, subtract one because the for loop increments by one at the end
 					}
+					else if (words[1] == "Perhaps") {
+						perhaps(code, i, varVals, varNames);
+					}
+					else if (words[1] == "Break-Time") {
+						continue;
+					}
 					else {
 						if (words.size() == 1) {
 							continue;
