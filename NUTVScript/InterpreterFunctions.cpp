@@ -6,7 +6,7 @@
 
 char delim = ' '; //space character
 
-void exclaim(std::vector<std::string> code, int line) { //code to enable the "Exclaim" command
+void exclaim(std::vector<std::string> code, int &line, std::vector<std::string> varNames, std::vector<int> varVals) { //code to enable the "Exclaim" command
 	std::string str = code[line];
 	str.erase(str.begin(),str.begin()+8); //remove the "Exclaim" word and empty space
 
@@ -25,26 +25,36 @@ void exclaim(std::vector<std::string> code, int line) { //code to enable the "Ex
 
 	for (int i = 0; i < words.size(); i++) {
 		if (!(words[i].at(0) == '%')) {
-			if (words[i].size() > 0) {
-				for (int j = 0; j < words[i].size() - 1; j++) {
-					if (words[i].at(j) == '/' && words[i].at(j + 1) == '%') {
-						std::cout << "% ";
-						i++;
-					}
-					else if(j == (words[i].size() - 2)) {
-						std::cout << words[i] << " ";
-					}
+			if (words.size() > 1) {
+				if (!(words[i].at(0) == '/' && words[i].at(1) == '%')) {
+					std::cout << words[i] << " ";
+				}
+				else {
+					words[i].erase(words[i].begin());
+					std::cout << words[i] << " ";
 				}
 			}
-			
+			else {
+				std::cout << words[i] << " ";
+			}
 		}
 		else {
-			//okay, so the word starts with a % sign
+			words[i].erase(words[i].begin()); //get rid of the percent sign
+				//find the variable need.
+			for (int j = 0; j < varNames.size(); j++) { //iterate through the variables vector to find the index of the variable selected
+				if (varNames[j] == words[i]) {
+					std::cout << varVals[j] << " ";
+					break;
+				}
+				else if (j == varNames.size() - 1) {
+					std::cout << "\nError: variable " << words[i] << " not found, check that all variables have already been declared." << std::endl;
+					line = code.size() - 2;
+					return; //set the last line of the program to cause it to gracefully crash
+				}
+			}
 		}
 	}
-
 	std::cout << std::endl;
-
 }
 
 void set(std::vector<std::string> code, int &line, std::vector<int>& varVals, std::vector<std::string>& varNames) {

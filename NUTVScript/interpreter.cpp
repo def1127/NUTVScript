@@ -116,7 +116,7 @@ void run(std::string filename) {
 						break;
 					}
 					else if (words[1] == "Exclaim") {
-						exclaim(code, i);
+						exclaim(code, i, varNames, varVals);
 					}
 					else if (words[1] == "Set") {
 						set(code, i, varVals, varNames);
