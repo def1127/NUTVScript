@@ -6,8 +6,6 @@
 #include "interpreterInit.h"
 #include "InterpreterFunctions.h"
 
-char delimiter = ' '; //space character
-
 void setVars(std::vector<std::string>& code, std::vector<int>& varVals, std::vector<std::string>& varNames) {
 	std::string str;
 
@@ -16,12 +14,8 @@ void setVars(std::vector<std::string>& code, std::vector<int>& varVals, std::vec
 		std::vector<std::string> words{};
 		str = code[i];
 		std::stringstream sstream(code[i]); //put the line of code into a string stream
-		std::string word;
 
-		do { //erase the string stream word by word in to a vector of words
-			word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end());
-			words.push_back(word);
-		} while (std::getline(sstream, word, delimiter));
+		getWords(sstream, words);
 
 		if (!(words.size() == 1 && words[0] == "")) { //checks that the words vector has at least two words in it, and deletes the empty first word if so
 			words.erase(words.begin());
