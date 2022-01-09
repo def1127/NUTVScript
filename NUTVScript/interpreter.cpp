@@ -109,6 +109,7 @@ void run(std::string filename) {
 				std::stringstream sstream(code[i]); //put the line of code into a string stream
 				std::string word;
 
+				//REPLACE WITH FUNCTION
 				do { //erase the string stream word by word in to a vector of words
 					word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
 					words.push_back(word);

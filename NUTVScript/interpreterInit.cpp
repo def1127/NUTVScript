@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "interpreterInit.h"
+#include "InterpreterFunctions.h"
 
 char delimiter = ' '; //space character
 
@@ -65,8 +66,3 @@ bool checkHeader(std::string filename, std::vector<std::string>& code) {
 	return false;
 }
 
-bool is_number(const std::string& s) {
-	std::string::const_iterator it = s.begin();
-	while (it != s.end() && std::isdigit(*it)) ++it;
-	return !s.empty() && it == s.end();
-}
