@@ -28,10 +28,7 @@ int jumpCut(std::vector<std::string> code, int line) {
 	if (line >= 0) {
 		for (i; i < code.size(); i++) {
 			std::vector<std::string> words{};
-			str = code[i];
-			std::stringstream sstream(code[i]); //put the line of code into a string stream
-
-			getWords(sstream, words);
+			getWords(code[i], words);
 
 			if (!(words.size() == 1 && words[0] == "")) { //checks that the words vector has at least two words in it, and deletes the empty first word if so
 				words.erase(words.begin());

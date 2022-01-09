@@ -7,16 +7,11 @@
 
 void perhaps(std::vector<std::string> code, int& line, std::vector<int>& varVals, std::vector<std::string>& varNames) {
 
-	std::string str = code[line];
-	str.erase(str.begin(), str.begin() + 8); //remove the "Perhaps" word and empty space
-
 	std::vector<std::string> words{};
-	std::stringstream sstream(str); //put the line of code into a string stream
+	getWords(code[line], words);
 
-	getWords(sstream, words);
-
-	if ((words.size() == 4 && words[0] == "")) { //checks that the words vector has at least 5 words in it, and deletes the empty first word if so
-		words.erase(words.begin());
+	if ((words.size() == 5 && words[0] == "")) { //checks that the words vector has at least 5 words in it, and deletes the empty first word if so
+		words.erase(words.begin(), words.begin()+2);
 	}
 
 	//logic

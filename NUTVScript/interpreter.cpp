@@ -57,12 +57,9 @@ void run(std::string filename) {
 		setVars(code, varVals, varNames);
 
 		for (int i = 0; i < code.size(); i++) {
-			std::string str;
 			std::vector<std::string> words{};
-			str = code[i];
-			std::stringstream sstream(code[i]); //put the line of code into a string stream
 
-			getWords(sstream, words);
+			getWords(code[i], words);
 
 			if (words.size() > 1) {
 				if (words[1].rfind("#", 0) == 0) { //if it detects a comment, delete it
@@ -84,14 +81,11 @@ void run(std::string filename) {
 		code.insert(code.begin(), "Jumpcut: main"); //insert a jumpcut into the first line of the program so it will start execution at the main scene
 
 		while (!done) {
-			std::string str;
 			for (int i = 0; i < code.size(); i++) {//iterate through the program line by line
 
 				std::vector<std::string> words{};
-				str = code[i];
-				std::stringstream sstream(code[i]); //put the line of code into a string stream
 
-				getWords(sstream, words);
+				getWords(code[i], words);
 
 				if (!(words.size() == 1)) {//iterate through and check what the first word in the line is, this tells us what command to run
 					if (words[1] == "Cut!") {

@@ -6,13 +6,8 @@
 
 void set(std::vector<std::string> code, int& line, std::vector<int>& varVals, std::vector<std::string>& varNames) {
 
-	std::string str = code[line];
-	str.erase(str.begin(), str.begin() + 4); //remove the "Set" word and empty space
-
 	std::vector<std::string> words{};
-	std::stringstream sstream(code[line]); //put the line of code into a string stream
-
-	getWords(sstream, words);
+	getWords(code[line], words);
 
 
 	if ((words.size() == 7 && words[0] == "")) { //checks that the words vector has at least 6 words in it, and deletes the empty first word if so

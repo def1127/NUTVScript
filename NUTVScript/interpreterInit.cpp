@@ -7,15 +7,12 @@
 #include "InterpreterFunctions.h"
 
 void setVars(std::vector<std::string>& code, std::vector<int>& varVals, std::vector<std::string>& varNames) {
-	std::string str;
 
 	for (int i = 0; i < code.size(); i++) {//iterate through the program line by line
 
 		std::vector<std::string> words{};
-		str = code[i];
-		std::stringstream sstream(code[i]); //put the line of code into a string stream
 
-		getWords(sstream, words);
+		getWords(code[i], words);
 
 		if (!(words.size() == 1 && words[0] == "")) { //checks that the words vector has at least two words in it, and deletes the empty first word if so
 			words.erase(words.begin());
