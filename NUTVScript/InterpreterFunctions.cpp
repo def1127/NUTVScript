@@ -37,17 +37,9 @@ void exclaim(std::vector<std::string> code, int& line, std::vector<std::string> 
 		else {
 			words[i].erase(words[i].begin()); //get rid of the percent sign
 				//find the variable need.
-			for (int j = 0; j < varNames.size(); j++) { //iterate through the variables vector to find the index of the variable selected
-				if (varNames[j] == words[i]) {
-					std::cout << varVals[j] << " ";
-					break;
-				}
-				else if (j == varNames.size() - 1) {
-					std::cout << "\nError: variable " << words[i] << " not found, check that all variables have already been declared." << std::endl;
-					line = code.size() - 2;
-					return; //set the last line of the program to cause it to gracefully crash
-				}
-			}
+
+			std::cout << varVals[findVar(varNames, words[i], code, line)] << " ";
+
 		}
 	}
 	std::cout << std::endl;
@@ -70,45 +62,15 @@ void set(std::vector<std::string> code, int& line, std::vector<int>& varVals, st
 
 	if (!((words.size() == 5) && words[1] == "=" && (words[3] == "+" || words[3] == "-"))) { //check that there are the proper number of words and that there is an equals sign and a +/-
 		std::cout << "Error, set command callled incorrectly \"" << code[line] << "\". Proper syntax is 'set [var1] = [var2] [+/-] [var3]'" << std::endl;
-		line = code.size() - 2;
+		line = (int)code.size() - 2;
 		return; //set the last line of the program to cause it to gracefully crash
 	}
 
-	int vara, varb, varc;
 	//find the 3 variables needed.
-	for (int i = 0; i < varNames.size(); i++) { //iterate through the variables vector to find the index of the variable selected
-		if (varNames[i] == words[0]) {
-			vara = i;
-			break;
-		}
-		else if (i == varNames.size() - 1) {
-			std::cout << "Error: variable " << words[0] << " not found, check that all variables have already been declared." << std::endl;
-			line = code.size() - 2;
-			return; //set the last line of the program to cause it to gracefully crash
-		}
-	}
-	for (int i = 0; i < varNames.size(); i++) { //iterate through the variables vector to find the index of the variable selected
-		if (varNames[i] == words[2]) {
-			varb = varVals[i];
-			break;
-		}
-		else if (i == varNames.size() - 1) {
-			std::cout << "Error: variable " << words[2] << " not found, check that all variables have already been declared." << std::endl;
-			line = code.size() - 2;
-			return; //set the last line of the program to cause it to gracefully crash
-		}
-	}
-	for (int i = 0; i < varNames.size(); i++) { //iterate through the variables vector to find the index of the variable selected
-		if (varNames[i] == words[4]) {
-			varc = varVals[i];
-			break;
-		}
-		else if (i == varNames.size() - 1) {
-			std::cout << "Error: variable " << words[4] << " not found, check that all variables have already been declared." << std::endl;
-			line = code.size() - 2;
-			return; //set the last line of the program to cause it to gracefully crash
-		}
-	}
+	int vara = findVar(varNames, words[0], code, line);
+	int varb = findVar(varNames, words[2], code, line);
+	int varc = findVar(varNames, words[4], code, line);
+
 	//perform the actual operations
 	if (words[3] == "+") {
 		varVals[vara] = varb + varc;
@@ -118,7 +80,7 @@ void set(std::vector<std::string> code, int& line, std::vector<int>& varVals, st
 	}
 	else {
 		std::cout << "Error: Invalid set command \"" << code[line] << "\". Proper syntax is 'set [var1] = [var2] [+/-] [var3]" << std::endl; //a catch error if something goes wrong
-		line = code.size() - 2;
+		line = (int)code.size() - 2;
 		return; //set the last line of the program to cause it to gracefully crash
 	}
 
@@ -136,7 +98,7 @@ int jumpCut(std::vector<std::string> code, int line) {
 	std::string targetScene = str;
 
 	if (line == -1) {
-		return code.size() - 1;
+		return (int)code.size() - 1;
 	}
 	int i = 0;
 
@@ -166,10 +128,14 @@ int jumpCut(std::vector<std::string> code, int line) {
 			}
 			else if (i == code.size() - 1) {
 				std::cout << "Error: Scene " << targetScene << " not found." << std::endl;
-				return code.size() - 1;
+				return (int)code.size() - 1;
 			}
 		}
 
+	}
+	else {
+		std::cout << "Error with """ << code[line] << """ please check syntax." << std::endl;
+		return (int)code.size() - 1;
 	}
 }
 
@@ -191,40 +157,21 @@ void perhaps(std::vector<std::string> code, int& line, std::vector<int>& varVals
 
 	if (words.size() != 3 && !(words[1] == ">" || words[1] == "=" || words[1] == "<")) {
 		std::cout << "Error with line " << code[line] << ". Perhaphs command called incorrectly, proper syntax is 'Perhaps var [>/=/<] var'" << std::endl;
-		line = code.size() - 2;
+		line = (int)code.size() - 2;
 		return;
 	}
 	//the size is 3 and the condition is in the middle, now search for the vars to perform the operation.
 	int vara, varb;
 
 	//find the 2 variables needed.
-	for (int i = 0; i < varNames.size(); i++) { //iterate through the variables vector to find the index of the variable selected
-		if (varNames[i] == words[0]) {
-			vara = varVals[i];
-			break;
-		}
-		else if (i == varNames.size() - 1) {
-			std::cout << "Error: variable " << words[0] << " not found, check that all variables have already been declared." << std::endl;
-			line = code.size() - 2;
-			return; //set the last line of the program to cause it to gracefully crash
-		}
-	}
-	for (int i = 0; i < varNames.size(); i++) { //iterate through the variables vector to find the index of the variable selected
-		if (varNames[i] == words[2]) {
-			varb = varVals[i];
-			break;
-		}
-		else if (i == varNames.size() - 1) {
-			std::cout << "Error: variable " << words[2] << " not found, check that all variables have already been declared." << std::endl;
-			line = code.size() - 2;
-			return; //set the last line of the program to cause it to gracefully crash
-		}
-	}
+	vara = findVar(varNames, words[0], code, line);
+
+	varb = findVar(varNames, words[2], code, line);
 
 	//now figure out what the condition is and whether or not it is true
 
 	if (words[1] == "<") {
-		if (vara < varb) {
+		if (varVals[vara] < varVals[varb]) {
 			return; //keep interpreting
 		}
 		else {
@@ -232,7 +179,7 @@ void perhaps(std::vector<std::string> code, int& line, std::vector<int>& varVals
 		}
 	}
 	else if (words[1] == ">") {
-		if (vara > varb) {
+		if (varVals[vara] > varVals[varb]) {
 			return;
 		}
 		else {
@@ -240,7 +187,7 @@ void perhaps(std::vector<std::string> code, int& line, std::vector<int>& varVals
 		}
 	}
 	else if (words[1] == "=") {
-		if (vara == varb) {
+		if (varVals[vara] == varVals[varb]) {
 			return;
 		}
 		else {
@@ -249,7 +196,7 @@ void perhaps(std::vector<std::string> code, int& line, std::vector<int>& varVals
 	}
 	else {
 		std::cout << "Error with line " << code[line] << ". Perhaphs command called incorrectly, proper syntax is 'Perhaps var [>/=/<] var'" << std::endl; //this is a catch error that should never be triggered
-		line = code.size() - 2;
+		line = (int)code.size() - 2;
 	}
 
 	return;
@@ -262,5 +209,21 @@ void getWords(std::stringstream& sstream, std::vector<std::string>& words) {
 		word.erase(std::remove_if(word.begin(), word.end(), isspace), word.end());
 		words.push_back(word);
 	} while (std::getline(sstream, word, delim));
+
+}
+
+int findVar(std::vector<std::string> varNames, std::string strToMatch, std::vector<std::string> code, int& line) {
+
+	for (int j = 0; j < varNames.size(); j++) { //iterate through the variables vector to find the index of the variable selected
+		if (varNames[j] == strToMatch) {
+			return j;
+			break;
+		}
+		else if (j == varNames.size() - 1) {
+			std::cout << "\nError: variable " << strToMatch << " not found, check that all variables have already been declared." << std::endl;
+			line = (int)code.size() - 2;
+			return 0; //set the last line of the program to cause it to gracefully crash
+		}
+	}
 
 }
