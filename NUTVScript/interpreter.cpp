@@ -7,6 +7,10 @@
 #include "InterpreterFunctions.h"
 #include "interpreter.h"
 #include "interpreterInit.h"
+#include "Exclaim.h"
+#include "Set.h"
+#include "jumpCut.h"
+#include "Perhaps.h"
 
 std::vector<std::string> code; //store the user's program as a vector of strings globally.
 

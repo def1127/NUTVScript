@@ -140,17 +140,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Exclaim.cpp" />
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="InterpreterFunctions.cpp" />
     <ClCompile Include="interpreterInit.cpp" />
+    <ClCompile Include="jumpCut.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuFunctions.cpp" />
+    <ClCompile Include="Perhaps.cpp" />
+    <ClCompile Include="Set.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Exclaim.h" />
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="InterpreterFunctions.h" />
     <ClInclude Include="interpreterInit.h" />
+    <ClInclude Include="jumpCut.h" />
     <ClInclude Include="MenuFunctions.h" />
+    <ClInclude Include="Perhaps.h" />
+    <ClInclude Include="Set.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

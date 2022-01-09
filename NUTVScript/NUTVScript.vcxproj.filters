@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\InterpreterCommands">
+      <UniqueIdentifier>{e20a18e4-5efe-48c7-b4e2-a7437d701075}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,6 +33,18 @@
     <ClCompile Include="interpreterInit.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Exclaim.cpp">
+      <Filter>Header Files\InterpreterCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="Set.cpp">
+      <Filter>Header Files\InterpreterCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="jumpCut.cpp">
+      <Filter>Header Files\InterpreterCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="Perhaps.cpp">
+      <Filter>Header Files\InterpreterCommands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuFunctions.h">
@@ -43,6 +58,18 @@
     </ClInclude>
     <ClInclude Include="interpreterInit.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exclaim.h">
+      <Filter>Header Files\InterpreterCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Set.h">
+      <Filter>Header Files\InterpreterCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="jumpCut.h">
+      <Filter>Header Files\InterpreterCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Perhaps.h">
+      <Filter>Header Files\InterpreterCommands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
