@@ -2,15 +2,18 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <map>
 
 #include "interpreterInit.h"
 #include "InterpreterFunctions.h"
 
-void setVars(std::vector<std::string>& code, std::vector<int>& varVals, std::vector<std::string>& varNames) {
+void setVars(std::vector<std::string>& code, std::map<std::string, int> &variables) {
 
 	for (int i = 0; i < code.size(); i++) {//iterate through the program line by line
 
 		std::vector<std::string> words{};
+
+		std::string key;
 
 		getWords(code[i], words);
 
@@ -23,21 +26,23 @@ void setVars(std::vector<std::string>& code, std::vector<int>& varVals, std::vec
 				std::cout << "Error: Variable declared improperly on line " << i + 1 << std::endl; //give an error for wrong variables
 				std::exit(0);
 			}
-			varNames.push_back(words[1]); //add the variable name and value to the vector
+
+			key = words[1];// store the variable name as the key.
 
 			if (is_number(words[3])) {
-				varVals.push_back(std::stoi(words[3]));
+
+				variables.insert({ key,std::stoi(words[3])});
+
 			}
 			else {
-				for (int j = 0; j < varNames.size(); j++) {
-					if (words[3] == varNames[j]) {
-						varVals.push_back(varVals[j]);
-						break;
-					}
-					else if (j == varNames.size() - 1) {
-						std::cout << "Error on line " << i << ". Variable " << words[1] << " cannot be initialized as " << words[3] << std::endl;
-						exit(0);
-					}
+				if (variables.count(words[3])){
+
+					variables.insert({ key,variables[words[3]]});
+
+				}
+				else {
+					std::cout << "Error with line: " << code[i] << ". Please fix variable declaration." << std::endl;
+					exit(0);
 				}
 			}
 		}

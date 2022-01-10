@@ -2,9 +2,10 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <map>
 #include "InterpreterFunctions.h"
 
-void exclaim(std::vector<std::string> code, int& line, std::vector<std::string> varNames, std::vector<int> varVals) { //code to enable the "Exclaim" command
+void exclaim(std::vector<std::string> code, int& line, std::map<std::string, int>& variables) { //code to enable the "Exclaim" command
 	
 	std::vector<std::string> words{};
 	getWords(code[line], words);
@@ -13,26 +14,33 @@ void exclaim(std::vector<std::string> code, int& line, std::vector<std::string> 
 		words.erase(words.begin(), words.begin() + 2);
 	}
 
-	for (int i = 0; i < words.size(); i++) {
-		if (!(words[i].at(0) == '%')) {
-			if (words.size() > 1) {
-				if (!(words[i].at(0) == '/' && words[i].at(1) == '%')) {
-					std::cout << words[i] << " ";
+	for (int i = 0; i < words.size(); i++) { //iterate through the line
+		if (!(words[i].at(0) == '%')) { //if there isn't a percent sign
+			if (words.size() > 1) { //if there is more than one character
+				if (!(words[i].at(0) == '/' && words[i].at(1) == '%')) { //check for the /% case
+					std::cout << words[i] << " "; //print out the word
 				}
 				else {
 					words[i].erase(words[i].begin());
-					std::cout << words[i] << " ";
+					std::cout << words[i] << " "; //otherwise erase the / and print out the word
 				}
 			}
 			else {
-				std::cout << words[i] << " ";
+				std::cout << words[i] << " "; //print out the word
 			}
 		}
 		else {
 			words[i].erase(words[i].begin()); //get rid of the percent sign
 				//find the variable need.
 
-			std::cout << varVals[findVar(varNames, words[i], code, line)] << " ";
+			if (variables.count(words[i])) {
+
+				std::cout << variables[words[i]] << " ";
+
+			}
+			else {
+				std::cout << "Variable " << words[i] << " could not be found." << std::endl;
+			}
 
 		}
 	}

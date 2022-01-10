@@ -2,10 +2,11 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <map>
 #include "InterpreterFunctions.h"
 #include "jumpCut.h"
 
-void perhaps(std::vector<std::string> code, int& line, std::vector<int>& varVals, std::vector<std::string>& varNames) {
+void perhaps(std::vector<std::string> code, int& line, std::map<std::string, int>& variables) {
 
 	std::vector<std::string> words{};
 	getWords(code[line], words);
@@ -21,43 +22,36 @@ void perhaps(std::vector<std::string> code, int& line, std::vector<int>& varVals
 		line = (int)code.size() - 2;
 		return;
 	}
-	//the size is 3 and the condition is in the middle, now search for the vars to perform the operation.
-	int vara, varb;
 
-	//find the 2 variables needed.
-	vara = findVar(varNames, words[0], code, line);
-
-	varb = findVar(varNames, words[2], code, line);
-
-	//now figure out what the condition is and whether or not it is true
-
-	if (words[1] == "<") {
-		if (varVals[vara] < varVals[varb]) {
-			return; //keep interpreting
+	if (variables.count(words[0]) && variables.count(words[2])) { //if the variables exist
+		if (words[1] == "<") {
+			if (variables[words[0]] < variables[words[2]]) {
+				return; //keep interpreting
+			}
+			else {
+				line = jumpCut(code, line);
+			}
+		}
+		else if (words[1] == ">") {
+			if (variables[words[0]] > variables[words[2]]) {
+				return;
+			}
+			else {
+				line = jumpCut(code, line);
+			}
+		}
+		else if (words[1] == "=") {
+			if (variables[words[0]] == variables[words[2]]) {
+				return;
+			}
+			else {
+				line = jumpCut(code, line);
+			}
 		}
 		else {
-			line = jumpCut(code, line);
+			std::cout << "Error with line " << code[line] << ". Perhaphs command called incorrectly, proper syntax is 'Perhaps var [>/=/<] var'" << std::endl; //this is a catch error that should never be triggered
+			line = (int)code.size() - 2;
 		}
-	}
-	else if (words[1] == ">") {
-		if (varVals[vara] > varVals[varb]) {
-			return;
-		}
-		else {
-			line = jumpCut(code, line);
-		}
-	}
-	else if (words[1] == "=") {
-		if (varVals[vara] == varVals[varb]) {
-			return;
-		}
-		else {
-			line = jumpCut(code, line);
-		}
-	}
-	else {
-		std::cout << "Error with line " << code[line] << ". Perhaphs command called incorrectly, proper syntax is 'Perhaps var [>/=/<] var'" << std::endl; //this is a catch error that should never be triggered
-		line = (int)code.size() - 2;
 	}
 
 	return;

@@ -18,22 +18,6 @@ void getWords(std::string line, std::vector<std::string>& words) {
 
 }
 
-int findVar(std::vector<std::string> varNames, std::string strToMatch, std::vector<std::string> code, int& line) {
-
-	for (int j = 0; j < varNames.size(); j++) { //iterate through the variables vector to find the index of the variable selected
-		if (varNames[j] == strToMatch) {
-			return j;
-			break;
-		}
-		else if (j == varNames.size() - 1) {
-			std::cout << "\nError: variable " << strToMatch << " not found, check that all variables have already been declared." << std::endl;
-			line = (int)code.size() - 2;
-			return 0; //set the last line of the program to cause it to gracefully crash
-		}
-	}
-
-}
-
 bool is_number(const std::string& s) {
 	std::string::const_iterator it = s.begin();
 	while (it != s.end() && std::isdigit(*it)) ++it;
