@@ -37,7 +37,7 @@ void setVars(std::vector<std::string>& code, std::map<std::string, int> &variabl
 			else {
 				if (variables.count(words[3])){
 
-					variables.emplace(key, variables.find(words[3]));
+					variables.insert({ key,variables[words[3]]});
 
 				}
 				else {
