@@ -1,4 +1,4 @@
 #pragma once
-
-void setVars(std::vector<std::string>& code, std::vector<int>& varVals, std::vector<std::string>& varNames);
+#include <map>
+void setVars(std::vector<std::string>& code, std::map<std::string, int>& variables);
 bool checkHeader(std::string filename, std::vector<std::string>& code);

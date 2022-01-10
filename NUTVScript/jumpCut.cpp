@@ -7,7 +7,6 @@
 int jumpCut(std::vector<std::string> code, int line) {
 	std::string str = code[line];
 
-
 	if (str.rfind("Jumpcut:", 0) == 0) {
 		str.erase(str.begin(), str.begin() + 9); //remove the "Jumpcut:" word and empty space
 	}

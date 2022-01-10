@@ -14,8 +14,7 @@
 
 std::vector<std::string> code; //store the user's program as a vector of strings globally.
 
-std::vector<int> varVals; //store the variable values
-std::vector<std::string> varNames; //store the variable names
+std::map<std::string, int> variables;
 
 void run(std::string filename) {
 
@@ -44,8 +43,7 @@ void run(std::string filename) {
 			code.push_back(line);
 		}
 		//clear all vectors in case there is anything left over.
-		varNames.erase(varNames.begin(), varNames.end());
-		varVals.erase(varVals.begin(), varVals.end());
+		variables.clear();
 
 		if (!checkHeader(filename, code)) {
 			std::cout << "Error: invalid file header, please correct." << std::endl;
@@ -54,7 +52,7 @@ void run(std::string filename) {
 
 		code.erase(code.begin(), code.begin() + 2); 
 
-		setVars(code, varVals, varNames);
+		setVars(code, variables);
 
 		for (int i = 0; i < code.size(); i++) {
 			std::vector<std::string> words{};
@@ -93,10 +91,10 @@ void run(std::string filename) {
 						break;
 					}
 					else if (words[1] == "Exclaim") {
-						exclaim(code, i, varNames, varVals);
+						exclaim(code, i, variables);
 					}
 					else if (words[1] == "Set") {
-						set(code, i, varVals, varNames);
+						set(code, i, variables);
 					}
 					else if (words[1].rfind("#", 0) == 0) {
 						continue;
@@ -108,7 +106,7 @@ void run(std::string filename) {
 						i = jumpCut(code, i) - 1; //set the line number to the jumpcut line number, subtract one because the for loop increments by one at the end
 					}
 					else if (words[1] == "Perhaps") {
-						perhaps(code, i, varVals, varNames);
+						perhaps(code, i, variables);
 					}
 					else if (words[1] == "Break-Time") {
 						continue;
