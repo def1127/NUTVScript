@@ -33,13 +33,13 @@ void exclaim(std::vector<std::string> code, int& line, std::map<std::string, int
 			words[i].erase(words[i].begin()); //get rid of the percent sign
 				//find the variable need.
 
-			if (variables.count(words[3])) {
+			if (variables.count(words[i])) {
 
-				std::cout << variables[words[3]] << " ";
+				std::cout << variables[words[i]] << " ";
 
 			}
 			else {
-				std::cout << "Variable " << words[3] << " could not be found." << std::endl;
+				std::cout << "Variable " << words[i] << " could not be found." << std::endl;
 			}
 
 		}
