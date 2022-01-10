@@ -23,6 +23,7 @@ void set(std::vector<std::string> code, int& line, std::map<std::string, int>& v
 		if (variables.count(words[0]) && variables.count(words[2])) {
 
 			variables[words[0]] = variables[words[2]];
+			return;
 
 		}
 
@@ -35,24 +36,49 @@ void set(std::vector<std::string> code, int& line, std::map<std::string, int>& v
 	}
 
 	//find the 3 variables needed.
-	//need to check if words 2 or 4 are numbers or text so you can set numbers if you don't want them as variables
+	int varb;
+	int varc;
 
+	if (is_number(words[2])) { //check if it is a number or variable and store data appropriately
+		varb = std::stoi(words[2]);
+	}
+	else {
+		if (variables.count(words[2])) {
+			varb = variables[words[2]];
+		}
+		else {
+			std::cout << "Variable " << words[2] << " could not be found." << std::endl;
+				line = (int)code.size() - 2;
+		}
+	}
 
-	if (variables.count(words[0]) && variables.count(words[2]) && variables.count(words[4])) {
+	if (is_number(words[4])) {
+		varc = std::stoi(words[4]);
+	}
+	else {
+		if (variables.count(words[4])) {
+			varc = variables[words[4]];
+		}
+		else {
+			std::cout << "Variable " << words[4] << " could not be found." << std::endl;
+			line = (int)code.size() - 2;
+		}
+	}
+
+	if (variables.count(words[0])) {
 
 		if (words[3] == "+") {
-			variables[words[0]] = variables[words[2]] + variables[words[4]];
+			variables[words[0]] = varb + varc;
 
 		}
 		else if (words[3] == "-") {
-			variables[words[0]] = variables[words[2]] - variables[words[4]];
+			variables[words[0]] = varb - varc;
 		}
+	}
 		else {
 			std::cout << "Error: Invalid set command \"" << code[line] << "\". Proper syntax is 'set [var1] = [var2] [+/-] [var3]" << std::endl; //a catch error if something goes wrong
 			line = (int)code.size() - 2;
 			return; //set the last line of the program to cause it to gracefully crash
 		}
-
-	}
 
 }
