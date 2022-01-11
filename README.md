@@ -1,5 +1,7 @@
 ## What is NUTVScript?
 NUTVScript is a custom interpreter designed to read .nutv code files that are formatted as film scripts. This is an esoteric language, it was not designed or intended for any practical use. NUTVScript allows programmers to write simple programs that perform basic math and output operations, with the main keywords of the language being derivatives of language commonly used in filmmaking.
+
+One key goal of this project was to ensure that there would be adequate and specific error messages for users. I therefore strove to capture all possible error conditions before the interpreter would crash, print out a message containing the code causing an error along with a description of what was wrong, or the correct syntax, and gracefully exit interpretation without crashing. 
 ## Development Process
 I started this project by determining the scope of which initial features I wanted NUTVScript to be able to support. I prioritized a key set of features based on the viability of implementation and necessity. I then used an iterative development process to arrive at a minimum viable product and have continued to enhance functionality through additional commits. An additional set of features were specified for future development and were added to my backlog to be worked through as time permits. 
 ## Key Takeaways
