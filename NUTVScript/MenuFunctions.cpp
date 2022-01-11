@@ -52,7 +52,7 @@ void help() { //print all commands available
 //https://www.delftstack.com/howto/cpp/how-to-get-list-of-files-in-a-directory-cpp/
 void ls() { //print out all files in the active directory
 
-    std::string path = "/Users/defdo/source/repos/NUTVScript/x64/Debug";
+    std::string path = "/Program Files/NUTVScript";
 
     for (const auto& file : std::filesystem::directory_iterator(path))
         std::cout << file.path() << std::endl;

@@ -19,7 +19,7 @@ std::map<std::string, int> variables;
 void run(std::string filename) {
 
 	std::ifstream file;
-	std::string path = "/Users/defdo/source/repos/NUTVScript/x64/Debug\\"; //this navigates the program to the active directory
+	std::string path = "/Program Files/NUTVScript\\"; //this navigates the program to the active directory
 
 	bool done = false; //has the program finished?
 
