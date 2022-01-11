@@ -1,22 +1,10 @@
-# NUTVScript
-NUTVScript is a custom interpreter designed to read .nutv code files that are formatted as film scripts. This is an esolang.
+## What is NUTVScript?
+NUTVScript is a custom interpreter designed to read .nutv code files that are formatted as film scripts. This is an esoteric language, it was not designed or intended for any practical use. NUTVScript allows programmers to write simple programs that perform basic math and output operations, with the main keywords of the language being derivatives of language commonly used in filmmaking.
 
-LET THE RECORD REFLECT THAT I STARTED THIS ON 01/05/22 AND HAVE A MVP ON 01/07/22
-
-Dont take this too seriously.
-## How to write a program / language specifications
-First line of file must be the name of the file.\
-Second line must begin with "Written By:"\
-Main function should be titled "Scene: main".\
-Declare a function with the "Scene:" keyword\
-Declare a variable (only integers allowed) with the "Enter:" keyword\
-**Files must end with "Cut!"**\
-To perform math, use the "Set" keyword\
-Syntax is "Set [var] = [var] [+/-] [var]"\
-Comments can be made only on their own line by starting the line with a # followed by a space.\
-All functions including main must end with Cut!\
-To print out to the console, use the "Exclaim " keyword followed by your string. You can print out variables by preceding the variable name with a '%'. If you want to print out a '%' without referencing a variable, use '/%'. You cannot exclaim a variable in the middle of the word, the variable must be its own separate word from the rest of the string. (ex. "Exclaim Variable /%a is set to %a" is valid, but "Exclaim variable /%a is set to%a" will not work as intended, and will not throw an error)
-
-## Functions
-Now this is very important, declare a function with the Scene: [name] keyphrase, if it doesn't look exactly like this, it won't be found by the interpreter.
-Each function **MUST** contain a JUMPCUT: to the next function you want to run, failure to do this will cause the interpreter to keep running code past the end of your function and may cause unintended behavior.
+One key goal of this project was to ensure that there would be adequate and specific error messages for users. I therefore strove to capture all possible error conditions before the interpreter would crash, print out a message containing the code causing an error along with a description of what was wrong, or the correct syntax, and gracefully exit interpretation without crashing. 
+## Development Process
+I started this project by determining the scope of which initial features I wanted NUTVScript to be able to support. I prioritized a key set of features based on the viability of implementation and necessity. I then used an iterative development process to arrive at a minimum viable product and have continued to enhance functionality through additional commits. An additional set of features were specified for future development and were added to my backlog to be worked through as time permits. 
+## Key Takeaways
+* Gained experience using GitHub
+* Increased insight into how a programming language functions behind the scenes
+* Increased knowledge of development in an iterative environment including changing requirements
