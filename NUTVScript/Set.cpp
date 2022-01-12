@@ -12,9 +12,12 @@ void set(std::vector<std::string> code, int& line, std::map<std::string, int>& v
 
 	if ((words.size() == 7 && words[0] == "")) { //checks that the words vector has at least 6 words in it, and deletes the empty first word if so
 		words.erase(words.begin(), words.begin() + 2);
-	}
-
-	if ((words.size() == 5 && words[0] == "")) { //checks that the words vector has at least 4 words in it, and deletes the empty first word if so
+	
+	}else if ((words.size() == 5 && words[0] == "")) { //checks that the words vector has at least 4 words in it, and deletes the empty first word if so
+		
+		words.erase(words.begin(), words.begin() + 2);
+	}else if ((words.size() == 4 && words[0] == "")) {
+		
 		words.erase(words.begin(), words.begin() + 2);
 	}
 
@@ -28,8 +31,22 @@ void set(std::vector<std::string> code, int& line, std::map<std::string, int>& v
 		}
 
 	}
+	else if (words.size() == 2) {
 
-	if (!((words.size() == 5) && words[1] == "=" && (words[3] == "+" || words[3] == "-"))) { //check that there are the proper number of words and that there is an equals sign and a +/-
+		if (words[1] == "++" && variables.count(words[0])) {
+
+			variables[words[0]]++;
+			return;
+
+		}
+		else if (words[1] == "--" && variables.count(words[0])) {
+
+			variables[words[0]]--;
+			return;
+
+		}
+
+	}else if (!((words.size() == 5) && words[1] == "=" && (words[3] == "+" || words[3] == "-"))) { //check that there are the proper number of words and that there is an equals sign and a +/-
 		std::cout << "Error, set command callled incorrectly \"" << code[line] << "\". Proper syntax is 'set [var1] = [var2] [+/-] [var3]'" << std::endl;
 		line = (int)code.size() - 2;
 		return; //set the last line of the program to cause it to gracefully crash
