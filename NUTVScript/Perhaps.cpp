@@ -23,9 +23,24 @@ void perhaps(std::vector<std::string> code, int& line, std::map<std::string, int
 		return;
 	}
 
-	if (variables.count(words[0]) && variables.count(words[2])) { //if the variables exist
+	int var2;
+	if (is_number(words[2])) {
+		var2 = std::stoi(words[2]);
+	}
+	else {
+		if (variables.count(words[2])) {
+			var2 = variables[words[2]];
+		}
+		else {
+			std::cout << "Error with line " << code[line] << ". Perhaphs command called incorrectly, proper syntax is 'Perhaps var [>/=/<] [var/int]'" << std::endl; //this is a catch error that should never be triggered
+			line = (int)code.size() - 2;
+		}
+	
+	}
+
+	if (variables.count(words[0])) { //if the variables exist
 		if (words[1] == "<") {
-			if (variables[words[0]] < variables[words[2]]) {
+			if (variables[words[0]] < var2) {
 				return; //keep interpreting
 			}
 			else {
@@ -33,7 +48,7 @@ void perhaps(std::vector<std::string> code, int& line, std::map<std::string, int
 			}
 		}
 		else if (words[1] == ">") {
-			if (variables[words[0]] > variables[words[2]]) {
+			if (variables[words[0]] > var2) {
 				return;
 			}
 			else {
@@ -41,16 +56,12 @@ void perhaps(std::vector<std::string> code, int& line, std::map<std::string, int
 			}
 		}
 		else if (words[1] == "=") {
-			if (variables[words[0]] == variables[words[2]]) {
+			if (variables[words[0]] == var2) {
 				return;
 			}
 			else {
 				line = jumpCut(code, line);
 			}
-		}
-		else {
-			std::cout << "Error with line " << code[line] << ". Perhaphs command called incorrectly, proper syntax is 'Perhaps var [>/=/<] var'" << std::endl; //this is a catch error that should never be triggered
-			line = (int)code.size() - 2;
 		}
 	}
 
