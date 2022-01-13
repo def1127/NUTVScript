@@ -16,23 +16,21 @@ std::vector<std::string> code; //store the user's program as a vector of strings
 
 std::map<std::string, int> variables;
 
-void run(std::string filename) {
-
+void run(const std::string& filename) {
 	std::ifstream file;
 	std::string path = "/Program Files/NUTVScript\\"; //this navigates the program to the active directory
-
-	bool done = false; //has the program finished?
 
 	path.append(filename);
 
 	file.open(path); //opens the file the user specified
 
-	if (file.fail()) { //if it fails, notfiy the user
+	if (file.fail()) { //if it fails, notify the user
 		std::cout << "\nThe program [" << filename << "] was not found!" << std::endl;
 		return;
 	}
-	else { //loads the file into a vector
-
+	else {
+		bool done = false;
+		//loads the file into a vector
 		std::string line;
 
 		//clear the code vector before writing to it
@@ -50,7 +48,7 @@ void run(std::string filename) {
 			return;
 		}
 
-		code.erase(code.begin(), code.begin() + 2); 
+		code.erase(code.begin(), code.begin() + 2);
 
 		setVars(code, variables);
 
@@ -73,14 +71,12 @@ void run(std::string filename) {
 				code.erase(code.begin() + i); //if the line is empty then erase it
 				i = i - 1;
 			}
-
 		}
 
 		code.insert(code.begin(), "Jumpcut: main"); //insert a jumpcut into the first line of the program so it will start execution at the main scene
 
 		while (!done) {
 			for (int i = 0; i < code.size(); i++) {//iterate through the program line by line
-
 				std::vector<std::string> words{};
 
 				getWords(code[i], words);
@@ -123,9 +119,7 @@ void run(std::string filename) {
 				}
 			}
 		}
-
 	}
 
 	file.close(); //close the file
-
 }

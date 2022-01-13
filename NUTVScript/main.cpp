@@ -4,12 +4,11 @@
 #include "interpreter.h"
 
 int main() {
+	printMenu();
 
-    printMenu();
-    
-    while (true) { //forever run the menu
-        getUserInput();
-    }
-    
-    return 0;
+	while (true) { //forever run the menu
+		getUserInput();
+	}
+
+	return 0;
 }

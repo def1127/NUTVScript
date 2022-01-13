@@ -5,8 +5,7 @@
 #include <map>
 #include "InterpreterFunctions.h"
 
-void exclaim(std::vector<std::string> code, int& line, std::map<std::string, int>& variables) { //code to enable the "Exclaim" command
-	
+void exclaim(const std::vector<std::string> code, int& line, std::map<std::string, int>& variables) { //code to enable the "Exclaim" command
 	std::vector<std::string> words{};
 	getWords(code[line], words);
 
@@ -33,15 +32,12 @@ void exclaim(std::vector<std::string> code, int& line, std::map<std::string, int
 			words[i].erase(words[i].begin()); //get rid of the percent sign
 				//find the variable need.
 
-			if (variables.count(words[i])) {
-
+			if (variables.contains(words[i])) {
 				std::cout << variables[words[i]] << " ";
-
 			}
 			else {
 				std::cout << "Variable " << words[i] << " could not be found." << std::endl;
 			}
-
 		}
 	}
 	std::cout << std::endl;

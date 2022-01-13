@@ -14,7 +14,7 @@ int jumpCut(std::vector<std::string> code, int line) {
 	std::string targetScene = str;
 
 	if (line == -1) {
-		return (int)code.size() - 1;
+		return static_cast<int>(code.size()) - 1;
 	}
 	int i = 0;
 
@@ -29,7 +29,7 @@ int jumpCut(std::vector<std::string> code, int line) {
 			std::vector<std::string> words{};
 			getWords(code[i], words);
 
-			if (!(words.size() == 1 && words[0] == "")) { //checks that the words vector has at least two words in it, and deletes the empty first word if so
+			if (!(words.size() == 1 && words[0].empty())) { //checks that the words vector has at least two words in it, and deletes the empty first word if so
 				words.erase(words.begin());
 			}
 
@@ -41,13 +41,12 @@ int jumpCut(std::vector<std::string> code, int line) {
 			}
 			else if (i == code.size() - 1) {
 				std::cout << "Error: Scene " << targetScene << " not found." << std::endl;
-				return (int)code.size() - 1;
+				return static_cast<int>(code.size()) - 1;
 			}
 		}
-
 	}
 	else {
 		std::cout << "Error with """ << code[line] << """ please check syntax." << std::endl;
-		return (int)code.size() - 1;
+		return static_cast<int>(code.size()) - 1;
 	}
 }

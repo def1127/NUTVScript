@@ -1,3 +1,3 @@
 #pragma once
 
-void run(std::string fileName); //runs the interpreter
+void run(const std::string& fileName); //runs the interpreter
