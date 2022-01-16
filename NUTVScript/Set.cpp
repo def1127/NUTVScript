@@ -35,7 +35,7 @@ void set(std::vector<std::string> code, int& line, std::map<std::string, int>& v
 			return;
 		}
 	}
-	else if (!((words.size() == 5) && words[1] == "=" && (words[3] == "+" || words[3] == "-"))) { //check that there are the proper number of words and that there is an equals sign and a +/-
+	else if (!((words.size() == 5) && words[1] == "=" && (words[3] == "+" || words[3] == "-" || words[3] == "*" || words[3] == "/"))) { //check that there are the proper number of words and that there is an equals sign and a +/-
 		std::cout << "Error, set command called incorrectly \"" << code[line] << "\". Proper syntax is 'set [var1] = [var2] [+/-] [var3]'" << std::endl;
 		line = static_cast<int>(code.size()) - 2;
 		return; //set the last line of the program to cause it to gracefully crash
@@ -77,6 +77,14 @@ void set(std::vector<std::string> code, int& line, std::map<std::string, int>& v
 		}
 		else if (words[3] == "-") {
 			variables[words[0]] = varb - varc;
+		}
+		else if (words[3] == "*")
+		{
+			variables[words[0]] = varb * varc;
+		}
+		else if (words[3] == "/")
+		{
+			variables[words[0]] = static_cast<int>(varb / varc);
 		}
 	}
 	else {
