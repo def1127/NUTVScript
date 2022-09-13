@@ -145,6 +145,9 @@
     <ClCompile Include="InterpreterFunctions.cpp" />
     <ClCompile Include="interpreterInit.cpp" />
     <ClCompile Include="jumpCut.cpp" />
+    <ClCompile Include="lineInterpreter.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuFunctions.cpp" />
     <ClCompile Include="Perhaps.cpp" />
@@ -156,6 +159,9 @@
     <ClInclude Include="InterpreterFunctions.h" />
     <ClInclude Include="interpreterInit.h" />
     <ClInclude Include="jumpCut.h" />
+    <ClInclude Include="lineInterpreter.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="MenuFunctions.h" />
     <ClInclude Include="Perhaps.h" />
     <ClInclude Include="Set.h" />

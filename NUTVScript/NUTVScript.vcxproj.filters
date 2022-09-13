@@ -45,6 +45,9 @@
     <ClCompile Include="Perhaps.cpp">
       <Filter>Header Files\InterpreterCommands</Filter>
     </ClCompile>
+    <ClCompile Include="lineInterpreter.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuFunctions.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="Perhaps.h">
       <Filter>Header Files\InterpreterCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="lineInterpreter.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

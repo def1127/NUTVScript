@@ -14,7 +14,7 @@
 
 std::vector<std::string> code; //store the user's program as a vector of strings globally.
 
-std::map<std::string, int> variables; //map of all the variables in the program with their names and values
+std::map<std::string, int> variables;
 
 void run(const std::string& filename) {
 	std::ifstream file;
@@ -48,32 +48,7 @@ void run(const std::string& filename) {
 			return;
 		}
 
-		code.erase(code.begin(), code.begin() + 2);
-
-		setVars(code, variables, filename);
-
-		correctVars(code, variables, filename);
-
-		for (int i = 0; i < code.size(); i++) {
-			std::vector<std::string> words{};
-
-			getWords(code[i], words);
-
-			if (words.size() > 1) {
-				if (words[1].rfind("#", 0) == 0) { //if it detects a comment, delete it
-					code.erase(code.begin() + i);
-					i = i - 1;
-				}
-				else if (words[1] == "Enter") { //if it detects an Enter command, delete it
-					code.erase(code.begin() + i);
-					i = i - 1;
-				}
-			}
-			else {
-				code.erase(code.begin() + i); //if the line is empty then erase it
-				i = i - 1;
-			}
-		}
+		setVars(code, variables);
 
 		code.insert(code.begin(), "Jumpcut: main"); //insert a jumpcut into the first line of the program so it will start execution at the main scene
 
